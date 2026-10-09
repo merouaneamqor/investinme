@@ -24,57 +24,58 @@ export default async function DashboardPage({
   const preview = payoutPreview(db);
   const share = shareForUser(preview, user.id);
   const activity = listActivity(db, user.id).slice(0, 6);
+  const totalCents = account.availableCents + account.principalCents + account.pendingCents;
 
   return (
     <>
       <div className="screen-title row-between">
         <div>
-          <p className="eyebrow">Battery pack</p>
+          <p className="eyebrow">Portfolio</p>
           <h1>{user.name}</h1>
         </div>
         <span className="pill">{networkPill()}</span>
       </div>
       <Flash error={params.error} notice={params.notice} />
 
-      <section className="wallet-hero battery-hero card">
+      <section className="wallet-hero portfolio-hero">
         <BatteryMeter
           availableCents={account.availableCents}
           principalCents={account.principalCents}
           pendingCents={account.pendingCents}
-          label={formatUsdt(account.availableCents)}
+          label={formatUsdt(totalCents)}
         />
         <WalletActions receive={<ReceivePanel address={user.depositAddress} embedded />} />
       </section>
 
-      <section className="cell-strip" aria-label="Pack status">
+      <section className="cell-strip" aria-label="Portfolio status">
         <article className="cell-card">
           <div className="cell-bar" style={{ ["--fill" as string]: packFill(account.principalCents) }} />
-          <p className="eyebrow">In cells</p>
+          <p className="eyebrow">Invested</p>
           <p className="figure">{formatUsdt(account.principalCents)}</p>
-          <p className="quiet">Invested principal</p>
+          <p className="quiet">Principal</p>
         </article>
         <article className="cell-card">
           <div className="cell-bar" style={{ ["--fill" as string]: packFill(account.pendingCents) }} />
-          <p className="eyebrow">In transit</p>
+          <p className="eyebrow">Pending</p>
           <p className="figure">{formatUsdt(account.pendingCents)}</p>
-          <p className="quiet">Pending sends</p>
+          <p className="quiet">Withdrawals</p>
         </article>
         <article className="cell-card">
           <div className="cell-bar" style={{ ["--fill" as string]: packFill(share.capCents) }} />
-          <p className="eyebrow">Daily output</p>
+          <p className="eyebrow">Daily yield</p>
           <p className="figure">{formatUsdt(share.capCents)}</p>
-          <p className="quiet">Cap for {todayUtc()}</p>
+          <p className="quiet">Cap {todayUtc()}</p>
         </article>
       </section>
 
       <div className="section-head">
-        <h2>Charge log</h2>
+        <h2>Recent</h2>
         <Link href="/activity">See all</Link>
       </div>
       <ActivityList items={activity} />
 
       <p className="funding-link">
-        <Link href="/transparency">Open funding transparency</Link>
+        <Link href="/transparency">Funding transparency</Link>
       </p>
     </>
   );

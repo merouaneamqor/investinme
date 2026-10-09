@@ -15,8 +15,8 @@ export default async function ActivityPage() {
   return (
     <>
       <div className="screen-title">
-        <p className="eyebrow">Charge log</p>
-        <h1>Permanent record</h1>
+        <p className="eyebrow">Activity</p>
+        <h1>Transaction history</h1>
       </div>
       <p className="lede">
         Available {formatUsdt(account.availableCents)} · Invested {formatUsdt(account.principalCents)} ·

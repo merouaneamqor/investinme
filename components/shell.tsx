@@ -10,9 +10,9 @@ type SessionUser = {
 };
 
 const tabs = [
-  { href: "/dashboard", label: "Pack", icon: BatteryIcon },
-  { href: "/invest", label: "Deploy", icon: DeployIcon },
-  { href: "/activity", label: "Log", icon: ActivityIcon },
+  { href: "/dashboard", label: "Portfolio", icon: PortfolioIcon },
+  { href: "/invest", label: "Invest", icon: InvestIcon },
+  { href: "/activity", label: "Activity", icon: ActivityIcon },
   { href: "/referrals", label: "Invite", icon: InviteIcon },
 ];
 
@@ -39,14 +39,14 @@ export function Shell({
         {banner}
         <header className="phone-header">
           <Link href={user ? "/dashboard" : "/"} className="brand">
-            <svg width="26" height="26" viewBox="0 0 28 28" aria-hidden="true">
-              <rect x="2" y="7" width="20" height="14" rx="3" fill="none" stroke="currentColor" strokeWidth="1.6" />
-              <rect x="22" y="11" width="3" height="6" rx="1" fill="var(--copper)" />
-              <rect x="5" y="10" width="8" height="8" rx="1" fill="var(--copper)" />
-            </svg>
+            <span className="brand-mark" aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 14 14">
+                <path d="M7 1L12 4v6L7 13 2 10V4L7 1z" fill="currentColor" />
+              </svg>
+            </span>
             <span>
               <strong>InvestInMe</strong>
-              <span>Battery · USDT</span>
+              <span>USDT · Ethereum</span>
             </span>
           </Link>
           {user ? (
@@ -87,25 +87,28 @@ export function Shell({
   );
 }
 
-function BatteryIcon() {
+function PortfolioIcon() {
   return (
     <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true">
-      <rect x="2" y="7" width="17" height="10" rx="2.2" fill="none" stroke="currentColor" strokeWidth="1.7" />
-      <rect x="19.5" y="10" width="2.5" height="4" rx="0.8" fill="currentColor" />
-      <rect x="5" y="10" width="5" height="4" rx="0.7" fill="currentColor" />
+      <rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" strokeWidth="1.7" />
+      <path d="M3 10h18" fill="none" stroke="currentColor" strokeWidth="1.7" />
+      <path d="M8 14h3" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" />
     </svg>
   );
 }
 
-function DeployIcon() {
+function InvestIcon() {
   return (
     <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true">
-      <rect x="3" y="5" width="6" height="14" rx="1.5" fill="none" stroke="currentColor" strokeWidth="1.7" />
-      <rect x="9" y="5" width="6" height="14" rx="1.5" fill="none" stroke="currentColor" strokeWidth="1.7" />
-      <rect x="15" y="5" width="6" height="14" rx="1.5" fill="none" stroke="currentColor" strokeWidth="1.7" />
-      <rect x="4.5" y="12" width="3" height="5" rx="0.5" fill="currentColor" />
-      <rect x="10.5" y="9" width="3" height="8" rx="0.5" fill="currentColor" />
-      <rect x="16.5" y="14" width="3" height="3" rx="0.5" fill="currentColor" />
+      <path
+        d="M4 16l5-5 3 3 7-7"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.7"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path d="M14 7h5v5" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" />
     </svg>
   );
 }

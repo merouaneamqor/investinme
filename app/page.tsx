@@ -16,68 +16,82 @@ export default async function HomePage({
 
   return (
     <div className="onboarding">
-      <section>
-        <p className="eyebrow">Battery funding · {networkPill()}</p>
-        <h1>Charge your pack. Earn from output.</h1>
-        <p className="lede">
-          Fund a battery project with Ethereum USDT. Liquid charge sits in your pack until you
-          deploy it into cells.
+      <section className="onboarding-hero">
+        <p className="onboarding-brand">
+          Invest<span>InMe</span>
         </p>
-        <ul className="rules">
-          <li>
-            <strong>Charge on Ethereum</strong>
-            Send only USDT (ERC-20) to your pack address.
-          </li>
-          <li>
-            <strong>Liquid, then cells</strong>
-            Confirmed deposits stay available until you deploy them as principal.
-          </li>
-          <li>
-            <strong>Daily output from revenue</strong>
-            3.00 USDT per 100.00 USDT in cells, paid only from recorded project revenue.
-          </li>
-        </ul>
+        <h1>Invest USDT. Earn from project revenue.</h1>
+        <p className="lede">
+          Deposit Ethereum USDT, invest into the project, and collect daily yield paid only from
+          recorded revenue.
+        </p>
+        <div className="onboarding-cta">
+          <a className="primary" href="#create-account">
+            Create account
+          </a>
+          <a className="secondary" href="#sign-in">
+            Sign in
+          </a>
+        </div>
+        <span className="pill">{networkPill()}</span>
       </section>
 
       <Flash error={params.error} notice={params.notice} />
 
-      <form action={registerAction} className="panel stack">
-        <h2>Create account</h2>
-        <label>
-          Name
-          <input name="name" required autoComplete="name" />
-        </label>
-        <label>
-          Email
-          <input name="email" type="email" required autoComplete="email" />
-        </label>
-        <label>
-          Password
-          <input name="password" type="password" required minLength={8} autoComplete="new-password" />
-        </label>
-        <label>
-          Referral code, optional
-          <input name="referralCode" autoComplete="off" />
-        </label>
-        <button className="primary" type="submit">
-          Create account
-        </button>
-      </form>
+      <section className="onboarding-forms" aria-label="Account">
+        <form id="create-account" action={registerAction} className="panel stack">
+          <h2>Create account</h2>
+          <label>
+            Name
+            <input name="name" required autoComplete="name" />
+          </label>
+          <label>
+            Email
+            <input name="email" type="email" required autoComplete="email" />
+          </label>
+          <label>
+            Password
+            <input name="password" type="password" required minLength={8} autoComplete="new-password" />
+          </label>
+          <label>
+            Referral code, optional
+            <input name="referralCode" autoComplete="off" />
+          </label>
+          <button className="primary" type="submit">
+            Create account
+          </button>
+        </form>
 
-      <form action={loginAction} className="panel stack">
-        <h2>Sign in</h2>
-        <label>
-          Email
-          <input name="email" type="email" required autoComplete="username" />
-        </label>
-        <label>
-          Password
-          <input name="password" type="password" required autoComplete="current-password" />
-        </label>
-        <button className="secondary" type="submit">
-          Sign in
-        </button>
-      </form>
+        <form id="sign-in" action={loginAction} className="panel stack">
+          <h2>Sign in</h2>
+          <label>
+            Email
+            <input name="email" type="email" required autoComplete="username" />
+          </label>
+          <label>
+            Password
+            <input name="password" type="password" required autoComplete="current-password" />
+          </label>
+          <button className="secondary" type="submit">
+            Sign in
+          </button>
+        </form>
+      </section>
+
+      <ul className="rules">
+        <li>
+          <strong>Deposit on Ethereum</strong>
+          Send only USDT (ERC-20) to your deposit address.
+        </li>
+        <li>
+          <strong>Available, then invested</strong>
+          Confirmed deposits stay available until you invest them as principal.
+        </li>
+        <li>
+          <strong>Daily yield from revenue</strong>
+          3.00 USDT per 100.00 USDT invested, paid only from recorded project revenue.
+        </li>
+      </ul>
 
       <p className="demo">
         Local operator: {DEMO_OPERATOR_EMAIL} / {DEMO_OPERATOR_PASSWORD}

@@ -19,36 +19,38 @@ export default async function InvestPage({
   return (
     <>
       <div className="screen-title">
-        <p className="eyebrow">Deploy</p>
-        <h1>Move charge into cells</h1>
+        <p className="eyebrow">Invest</p>
+        <h1>Allocate USDT</h1>
       </div>
       <Flash error={params.error} notice={params.notice} />
       <p className="lede">
-        Liquid {formatUsdt(account.availableCents)}. In cells {formatUsdt(account.principalCents)}.
-        Daily output {formatUsdt(dailyCapCents(account.principalCents))}.
+        Available {formatUsdt(account.availableCents)}. Invested {formatUsdt(account.principalCents)}.
+        Daily yield {formatUsdt(dailyCapCents(account.principalCents))}.
       </p>
 
       <section className="forms">
         <form action={investAction} className="card stack">
-          <h2>Deploy into cells</h2>
-          <p className="quiet">Moves liquid USDT into principal. Not used to pay other investors.</p>
+          <h2>Invest</h2>
+          <p className="quiet">
+            Moves available USDT into principal. Principal is not used to pay other investors.
+          </p>
           <label>
             Amount (USDT)
-            <input name="amount" inputMode="decimal" placeholder="100.00" required />
+            <input name="amount" type="text" inputMode="decimal" placeholder="100.00" required />
           </label>
           <button className="primary" type="submit">
-            Deploy
+            Invest
           </button>
         </form>
         <form action={releasePrincipalAction} className="card stack">
-          <h2>Return to liquid</h2>
-          <p className="quiet">Moves invested USDT back to available charge.</p>
+          <h2>Move to available</h2>
+          <p className="quiet">Returns invested USDT to your available balance.</p>
           <label>
             Amount (USDT)
-            <input name="amount" inputMode="decimal" placeholder="100.00" required />
+            <input name="amount" type="text" inputMode="decimal" placeholder="100.00" required />
           </label>
           <button className="secondary" type="submit">
-            Undeploy
+            Move to available
           </button>
         </form>
       </section>

@@ -189,22 +189,44 @@ function centsToUsdt(amountCents: number, decimals = 6): bigint {
   return BigInt(amountCents) * 10n ** BigInt(decimals - 2);
 }
 
+function depositLookbackBlocks(): bigint {
+  const raw = process.env.ETH_DEPOSIT_LOOKBACK_BLOCKS?.trim();
+  if (raw && /^\d+$/.test(raw)) return BigInt(raw);
+  // Public Sepolia RPCs often prune history; keep the default short.
+  return ethNetwork() === "mainnet" ? 14_400n : 2_000n;
+}
+
 export async function fetchInboundUsdt(address: string, fromBlock?: bigint): Promise<ChainTransfer[]> {
   const config = networkConfig();
   const client = publicClient();
   const to = assertEthAddress(address);
   const latest = await client.getBlockNumber();
-  // Look back ~2 days of blocks (~12s) on mainnet; Sepolia similar. Cap for RPC friendliness.
-  const lookback = 14_400n;
+  const lookback = depositLookbackBlocks();
   const start = fromBlock ?? (latest > lookback ? latest - lookback : 0n);
+  // Chunk getLogs so public nodes do not reject large ranges.
+  const chunk = 1_000n;
 
-  const logs = await client.getLogs({
-    address: config.usdtContract,
-    event: transferEvent,
-    args: { to },
-    fromBlock: start,
-    toBlock: latest,
-  });
+  const logs = [];
+  for (let from = start; from <= latest; from += chunk + 1n) {
+    const toBlock = from + chunk > latest ? latest : from + chunk;
+    try {
+      const batch = await client.getLogs({
+        address: config.usdtContract,
+        event: transferEvent,
+        args: { to },
+        fromBlock: from,
+        toBlock,
+      });
+      logs.push(...batch);
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
+      // Skip pruned windows; keep scanning newer chunks.
+      if (/pruned history|history unavailable|block range/i.test(message)) {
+        continue;
+      }
+      throw error;
+    }
+  }
 
   const transfers: ChainTransfer[] = [];
   for (const log of logs) {

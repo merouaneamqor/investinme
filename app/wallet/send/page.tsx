@@ -31,15 +31,15 @@ export default async function SendPage({
     <div className="send-screen">
       <div className="screen-title row-between">
         <div>
-          <p className="eyebrow">Drain</p>
-          <h1>Send charge out</h1>
+          <p className="eyebrow">Withdraw</p>
+          <h1>Send USDT out</h1>
         </div>
         <span className="pill">{networkPill()}</span>
       </div>
       <Flash error={params.error} notice={params.notice} />
       <p className="lede">
-        Available {formatUsdt(account.availableCents)}. Ethereum address only. Principal cannot be
-        selected.
+        Available {formatUsdt(account.availableCents)}. Ethereum address only. Invested principal
+        cannot be withdrawn here.
       </p>
 
       {!sendsOpen ? (
@@ -48,22 +48,22 @@ export default async function SendPage({
             Withdrawals are paused. You cannot send USDT until the operator resumes them.
           </p>
           <Link className="secondary-link" href="/dashboard">
-            Back to pack
+            Back to portfolio
           </Link>
         </div>
       ) : confirmStep ? (
         <form action={sendAction} className="card stack">
-          <h2>Confirm send</h2>
+          <h2>Confirm withdraw</h2>
           <p>
-            Send <strong>{params.amount} USDT</strong> to <code className="address-block">{params.toAddress}</code>{" "}
-            on Ethereum.
+            Send <strong>{params.amount} USDT</strong> to{" "}
+            <code className="address-block">{params.toAddress}</code> on Ethereum.
           </p>
           <input type="hidden" name="amount" value={params.amount} />
           <input type="hidden" name="toAddress" value={params.toAddress} />
           <input type="hidden" name="confirm" value="1" />
           <div className="sticky-submit stack">
             <button className="primary" type="submit">
-              Confirm and send
+              Confirm and withdraw
             </button>
             <Link className="secondary-link" href="/wallet/send">
               Edit
@@ -76,6 +76,7 @@ export default async function SendPage({
             Amount (USDT)
             <input
               name="amount"
+              type="text"
               inputMode="decimal"
               placeholder="10.00"
               defaultValue={params.amount}
@@ -86,15 +87,17 @@ export default async function SendPage({
             Destination Ethereum address
             <input
               name="toAddress"
+              type="text"
               placeholder="0x…"
               defaultValue={params.toAddress}
               autoComplete="off"
+              spellCheck={false}
               required
             />
           </label>
           <div className="sticky-submit">
             <button className="primary" type="submit">
-              Review send
+              Review withdraw
             </button>
           </div>
         </form>

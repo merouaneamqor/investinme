@@ -16,7 +16,7 @@ export function WalletActions({ receive }: { receive: React.ReactNode }) {
               <path d="M5 20h14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
             </svg>
           </span>
-          <span>Charge</span>
+          <span>Deposit</span>
         </button>
         <Link href="/wallet/send" className="round-action">
           <span className="round-action-icon" aria-hidden="true">
@@ -25,23 +25,28 @@ export function WalletActions({ receive }: { receive: React.ReactNode }) {
               <path d="M5 4h14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
             </svg>
           </span>
-          <span>Drain</span>
+          <span>Withdraw</span>
         </Link>
         <Link href="/invest" className="round-action">
           <span className="round-action-icon" aria-hidden="true">
             <svg width="20" height="20" viewBox="0 0 24 24">
-              <rect x="4" y="7" width="14" height="10" rx="2" fill="none" stroke="currentColor" strokeWidth="2" />
-              <rect x="18" y="10" width="2.5" height="4" rx="0.8" fill="currentColor" />
-              <rect x="7" y="10" width="4" height="4" rx="0.6" fill="currentColor" />
+              <path
+                d="M4 16l5-5 3 3 7-7"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
             </svg>
           </span>
-          <span>Deploy</span>
+          <span>Invest</span>
         </Link>
       </div>
       {open ? (
-        <div className="receive-sheet" role="dialog" aria-label="Charge USDT">
+        <div className="receive-sheet" role="dialog" aria-label="Deposit USDT">
           <div className="receive-sheet-head">
-            <h2>Charge pack</h2>
+            <h2>Deposit USDT</h2>
             <button type="button" className="sheet-close" onClick={() => setOpen(false)}>
               Close
             </button>

@@ -62,7 +62,7 @@ export default async function OperationsPage({
       <div className="row-between">
         <div>
           <p className="eyebrow">Operations</p>
-          <h1>Record funding, sync the chain.</h1>
+          <h1>Admin console</h1>
         </div>
         <span className="pill">{networkPill()}</span>
       </div>

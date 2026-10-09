@@ -20,11 +20,11 @@ export default async function ReferralsPage() {
     <>
       <div className="screen-title">
         <p className="eyebrow">Invite</p>
-        <h1>Share your code</h1>
+        <h1>Referral rewards</h1>
       </div>
       <p className="lede">
-        10.00 USDT posts to your wallet after the invitee holds at least 100.00 USDT of principal and
-        the referral wallet can pay it.
+        Earn 10.00 USDT after an invitee holds at least 100.00 USDT invested and the referral wallet
+        can pay it.
       </p>
       <article className="card stack">
         <p className="eyebrow">Your code</p>

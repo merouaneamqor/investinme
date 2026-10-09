@@ -23,12 +23,12 @@ export async function ReceivePanel({
   const qr = await QRCode.toDataURL(address, {
     margin: 1,
     width: 168,
-    color: { dark: "#142536", light: "#f5faff" },
+    color: { dark: "#0b0e11", light: "#ffffff" },
   });
 
   const body = (
     <div className="receive-panel-body">
-      <p className="quiet">Charge with USDT on Ethereum only.</p>
+      <p className="quiet">Deposit USDT on Ethereum only.</p>
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img className="qr" src={qr} alt="QR code for the Ethereum deposit address" width={168} height={168} />
       <code className="address-block">{address}</code>

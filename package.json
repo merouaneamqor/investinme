@@ -1,0 +1,27 @@
+{
+  "name": "investinme",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "test": "tsx --test lib/*.test.ts",
+    "sync:ethereum": "tsx scripts/sync-ethereum.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "next": "^15.5.4",
+    "qrcode": "^1.5.4",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "viem": "^2.57.4"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.30",
+    "@types/qrcode": "^1.5.6",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "tsx": "^4.20.5",
+    "typescript": "^5.9.2"
+  }
+}

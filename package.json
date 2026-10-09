@@ -1,6 +1,9 @@
 {
   "name": "investinme",
   "private": true,
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
